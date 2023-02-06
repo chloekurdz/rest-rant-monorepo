@@ -4,7 +4,10 @@ const db = require("../models")
 const { User } = db
 
 router.post('/', async (req, res) => {
-    const user = await User.create(req.body)
+    const user = await User.create({
+        ...resizeTo,
+        passwordDigest: await bcrypt.hash(password, 10)
+    })
     res.json(user)
 })
 
